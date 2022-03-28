@@ -1,0 +1,45 @@
+.float-container {
+    display: flex;
+    border: 4px solid black;
+    margin-bottom: 10px;
+    width: 40%
+
+}
+
+.float-child {
+    flex: 1;
+}
+
+.float-child-texto {
+    width: fit-content;
+    margin-left: 2%;
+    
+}
+
+
+
+.articulo-imagen {
+    margin-left: 10px;
+    width: 200px; 
+    height: 200px; 
+    float: right;
+    
+}
+
+.articulo-titulo {
+
+}
+
+
+.nav-container {
+    color: gray;
+}
+.navbar {
+    border-color: aliceblue;
+    background-color: gray;
+}
+.navbar-item {
+    margin-left: 20px;
+    align-self: center;
+    color: white;
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar artículo{% endblock title %}
+
+{% block content %}
+
+
+<h1>Editar artículo</h1>
+<div class="row">
+    <div class="col-2">
+        <a class="btn btn-outline-primary" href={% url 'home' %}>Volver</a>
+    </div>
+</div>
+<hr>
+<br>
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-outline-success">Editar</button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{post.titulo}}{% endblock title %}
+
+{% block content %}
+    
+<div class="row">
+    <div class="col-3">
+        <a class="btn btn-outline-primary" href={% url 'home' %}>Volver</a>
+    </div>
+    <div class="col-1">
+        <a class="btn btn-outline-secondary " href={% url 'editarArt' post.pk %}>Editar</a>
+    </div>
+    <div class="col-1">
+        <a class="btn btn-outline-danger" href={% url 'eliminarArt' post.pk %}>Eliminar</a>
+    </div>
+</div>
+<hr>
+    
+    <br>
+    {{post.titulo}}
+{% endblock content %}
