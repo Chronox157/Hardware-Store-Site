@@ -8,6 +8,6 @@ urlpatterns = [
     path("miperfil/", views.MiPerfil, name="miperfil"),
     path("articulo/crear/", CrearArticuloView.as_view(), name="crearArt"),
     path("articulo/editar/<int:pk>/", EditarArticuloView.as_view(), name="editarArt"),
-    path("articulo/<int:pk>/eliminar/", EliminarArticuloView.as_view(), name="eliminarArt")
+    path("articulo/eliminar/<int:pk>/", EliminarArticuloView.as_view(), name="eliminarArt")
 
 ]

@@ -5,12 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from ferre.models import Articulo
 from .forms import ArticuloForm
+import calendar
 
 
 class HomeView(ListView):
     model = Articulo
     template_name = "home.html"
-    ordering = ['-id']
+    ordering = ['-fecha_pub']
 
 class ArticuloView(DetailView):
     model = Articulo

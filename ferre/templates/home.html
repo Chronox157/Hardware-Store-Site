@@ -6,15 +6,28 @@
     {% for post in object_list %}
     <div class="container col-5">
     <div class="card" style="width: 28rem;">
+        <div class="card-header">
+            <h3 class="card-title">{{post.titulo}}</h3>
+            <h5 class="text-muted">$ {{post.precio}}</h5>
+        </div>
         <div class="card-body">
-          <h4 class="card-title">{{post.titulo}}</h4>
-          <h6 class="muted">$ {{post.precio}}</h6>
-          <hr>
+
           <p class="card-text">{{post.specs}}</p>
           <a href={% url 'articulo' post.pk %} class="btn btn-primary">Detalles</a>
         </div>
         <img src="{{post.img.url}}" class="card-img-bottom" alt="...">
         <br>
+        <div class="card-footer">
+            <div class="row">
+                <div class="container col">
+                    <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                </div>
+                <div class="container col">
+                    <h6 class="text-end">De: {{post.autor}}</h6>
+                </div>
+            </div>
+        </div>
+            
     </div>
     <br>
     </div>    
