@@ -2,6 +2,7 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 from datetime import datetime, date
 
 class Articulo(models.Model):
@@ -10,7 +11,7 @@ class Articulo(models.Model):
     precio = models.IntegerField()
     specs = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = RichTextField(blank=True,null=True)
     fecha_pub = models.DateField(auto_now_add=True)
 
     def __str__(self):

@@ -20,14 +20,15 @@ class ArticuloView(DetailView):
 
 class CrearArticuloView(CreateView):
     model = Articulo
-    #form_class = ArticuloForm
+    form_class = ArticuloForm
     template_name = "articulos/crear_articulo.html"
-    fields = '__all__'
+    #fields = '__all__'
 
 class EditarArticuloView(UpdateView):
     model = Articulo
+    form_class = ArticuloForm
     template_name = 'articulos/editar_articulo.html'
-    fields = ['titulo', 'precio', 'specs', 'body']
+    #ields = ['titulo', 'precio', 'specs', 'body']
     context_object_name = 'post'
 
 class EliminarArticuloView(DeleteView):

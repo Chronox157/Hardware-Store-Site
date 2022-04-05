@@ -8,15 +8,50 @@
     <div class="col-3">
         <a class="btn btn-outline-primary" href={% url 'home' %}>Volver</a>
     </div>
-    <div class="col-1">
-        <a class="btn btn-outline-secondary " href={% url 'editarArt' post.pk %}>Editar</a>
-    </div>
-    <div class="col-1">
-        <a class="btn btn-outline-danger" href={% url 'eliminarArt' post.pk %}>Eliminar</a>
-    </div>
+    {% comment %} 
+    Si el usuario logeado es quien publicó, puede editar y eliminar
+    {% endcomment %}
+    {% if user.is_authenticated and user == post.autor %}
+        <div class="col-1">
+            <a class="btn btn-outline-secondary " href={% url 'editarArt' post.pk %}>Editar</a>
+        </div>
+        <div class="col-1">
+            <a class="btn btn-outline-danger" href={% url 'eliminarArt' post.pk %}>Eliminar</a>
+        </div>
+    {% else %}
+    {% endif %}
+
+
 </div>
 <hr>
-    
-    <br>
-    {{post.titulo}}
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-title btn btn-primary btn-lg disabled">
+                {{post.titulo}}
+            </div>
+            <div class="card-body">
+                <img class="img-fluid rounded" src={{post.img.url}} alt="">
+            </div>
+            
+
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                {{post.body|safe}}
+            </div>
+            <div class="container">
+                <h6 class="text-muted">De: {{post.autor}}</h6>
+                <br>
+            </div>
+            <div class="btn btn-primary btn-lg disabled">
+                <h4>$ {{post.precio}}</h4>
+            </div>
+            
+        </div>
+    </div>
+</div>
 {% endblock content %}
