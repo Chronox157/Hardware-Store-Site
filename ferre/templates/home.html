@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-4">
+        <h2>Hola</h2>
+    </div>
+    <div class="col-8">
+        {% if object_list %}
+        <ul>
+            <center>
+                {% for post in object_list %}
+                <div class="container">
+                    <div class="card" style="width: 28rem;">
+                        <div class="card-header">
+                            <h3 class="card-title">{{post.titulo}}</h3>
+                            <h5 class="text-muted">$ {{post.precio}}</h5>
+                        </div>
+                        <div class="card-body">
+
+                        <p class="card-text">{{post.specs}}</p>
+                        <a href={% url 'articulo' post.pk %} class="btn btn-primary">Detalles</a>
+                        </div>
+                        {% if post.get_img_url != None %}
+                            <img src="{{post.get_img_url}}" class="img-fluid card-img-bottom" alt=" ">
+                        {% endif %}
+                        <br>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="container col">
+                                    <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                </div>
+                                <div class="container col">
+                                    <h6 class="text-end">De: {{post.autor}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <br>
+                </div>    
+
+                {% endfor %}
+            </center>
+        </ul>
+{% else %}
+    <h1>No hay elementos para mostrar</h1>
+{% endif %}
+
+    </div>
+</div>
+
+{% endblock content %}
