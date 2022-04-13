@@ -17,8 +17,58 @@
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-outline-success">Registrarse</button>
+        <div class="row">
+            <div class="col">
+                <label for="">
+                    Usuario: 
+                    <br>
+                    {{ form.username }}
+                </label>
+                <br><br>     
+                <label for="">
+                    Nombre: 
+                    <br>
+                    {{ form.nombre }}
+                </label>
+                <br><br>      
+                <label for="">
+                    Apellido: 
+                    <br>
+                    {{ form.apellido }}
+                </label>
+            </div>
+            <div class="col">
+                <label for="">
+                    Contraseña: 
+                    <br>
+                    {{ form.password1 }}
+                </label>
+                <br><br>
+
+                
+                <label for="">
+                    Confirma contraseña: 
+                    <br>
+                    {{ form.password2 }}
+                </label>
+                <br><br><br>
+
+                <button class="btn btn-outline-success">Registrarse</button>
+            </div>
+            <div class="col">
+                <p>Requerimientos de la contraseña:</p>
+                <ul>
+                    <li>No puede ser similar a otros datos</li>
+                    <li>Mínimo 8 carácteres</li>
+                    <li>No puede ser una clave muy común</li>
+                    (Ej: "password" "12345678")
+                    <li>No puede ser unicamente numeros</li>
+                </ul>
+                
+            </div>
+        </div>
+        
+        
     </form>
 </div>
 

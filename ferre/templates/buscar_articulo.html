@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Buscando...{% endblock title %}
+
+{% block content %}
+    <center>
+
+        {% if buscado %}
+            <h1>Tu busqueda:</h1>
+            <h2>{{ buscado }}</h2>
+        
+        {% else %}
+            <h1>No se realizó una busqueda</h1>
+        {% endif %}
+
+        {{ buscado }}
+        <br>
+
+    
+    </center>
+{% endblock content %}

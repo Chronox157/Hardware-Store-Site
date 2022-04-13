@@ -32,32 +32,27 @@
                     Publicar
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item">DEBES INICIAR SESIÓN PARA HACER ESO</a>
+                    <a class="dropdown-item" href={% url 'login' %}>DEBES INICIAR SESIÓN PARA HACER ESO</a>
                   </ul>
 
                 </li>
                 {% endif %}
 
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="/admin">Admin</a>
+                <form class="d-flex" method=POST action="">
+                  {% csrf_token %}
+
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscado">
+                  <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                </form>
               </li>
             </ul>
             {% if user.is_authenticated %}
             <h6 style="color: white;">Bienvenido {{user.first_name}}!</h6>
             <div style="padding-left: 20px;">
-              <a class="btn btn-outline-info" href={% url 'logout' %}>Mi Perfil</a>
+              <a class="btn btn-outline-info" href="">Mi Perfil</a>
             </div>
             <div style="padding-left: 10px;">
               <a class="btn btn-outline-danger" href={% url 'logout' %}>Salir</a>

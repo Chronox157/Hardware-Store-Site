@@ -11,7 +11,7 @@
     {% comment %} 
     Si el usuario logeado es quien publicó, puede editar y eliminar
     {% endcomment %}
-    {% if user.is_authenticated and user == post.autor %}
+    {% if user.is_authenticated and user == post.autor or user.is_authenticated and user.is_superuser%}
         <div class="col-1">
             <a class="btn btn-outline-secondary " href={% url 'editarArt' post.pk %}>Editar</a>
         </div>
@@ -32,7 +32,14 @@
                 {{post.titulo}}
             </div>
             <div class="card-body">
-                <img class="img-fluid rounded" src={{post.img.url}} alt="">
+                {% if post.get_img_url != None %}
+                    <img class="img-fluid rounded" src={{post.get_img_url}} alt=" ">
+                {% else %}
+                <center>
+                    <h5 class="text-muted">Imagen no disponible</h5>
+                </center>
+
+                {% endif %}
             </div>
             
 

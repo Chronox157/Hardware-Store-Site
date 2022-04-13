@@ -14,19 +14,33 @@
 </div>
 <hr>
 <br>
-<div class="container form-group">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form}}
-        <br><br>
-        <button class="btn btn-outline-success">Acceder</button>
-    </form>
-</div>
-<br><br><br>
-
-<div class="container">    
-    <h2>¿No tienes cuenta?</h2>
-    <a class="btn btn-outline-dark" href= {% url 'registro' %} >Registrate</a>
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="">
+                    Usuario:
+                    <br>
+                    {{form.username}}
+                </label>
+                <br>
+                <label for="">
+                    Contraseña:
+                    <br>
+                    {{form.password}}
+                </label>
+                <br><br>
+                <button class="btn btn-outline-success">Acceder</button>
+            </form>
+        </div>
+    </div>
+    <div class="col">
+        <div class="container">    
+            <h2>¿No tienes cuenta?</h2>
+            <a class="btn btn-outline-dark" href= {% url 'registro' %} >Registrate</a>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

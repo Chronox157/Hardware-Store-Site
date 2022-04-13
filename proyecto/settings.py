@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ferre',
     'miembros',
-    'ckeditor'
+    'ckeditor',
+    'livereload'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"

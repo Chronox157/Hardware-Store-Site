@@ -20,3 +20,8 @@ class Articulo(models.Model):
     def get_absolute_url(self):
         return reverse("articulo", kwargs={"pk": self.pk})
     
+    def get_img_url(self):
+        if self.img and hasattr(self.img, 'url'):
+            return self.img.url
+        else:
+            return None

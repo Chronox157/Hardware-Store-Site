@@ -13,6 +13,7 @@ class HomeView(ListView):
     template_name = "home.html"
     ordering = ['-fecha_pub']
 
+
 class ArticuloView(DetailView):
     model = Articulo
     template_name = "articulos/articulo_detalle.html"
@@ -22,13 +23,15 @@ class CrearArticuloView(CreateView):
     model = Articulo
     form_class = ArticuloForm
     template_name = "articulos/crear_articulo.html"
-    #fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
 
 class EditarArticuloView(UpdateView):
     model = Articulo
     form_class = ArticuloForm
     template_name = 'articulos/editar_articulo.html'
-    #ields = ['titulo', 'precio', 'specs', 'body']
     context_object_name = 'post'
 
 class EliminarArticuloView(DeleteView):
