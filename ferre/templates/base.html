@@ -39,15 +39,8 @@
                 {% endif %}
 
               </li>
-
-              <li class="nav-item">
-                <form class="d-flex" method=POST action="">
-                  {% csrf_token %}
-
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscado">
-                  <button class="btn btn-outline-secondary" type="submit">Buscar</button>
-                </form>
-              </li>
+              {% block busquedabar %}
+              {% endblock busquedabar %}
             </ul>
             {% if user.is_authenticated %}
             <h6 style="color: white;">Bienvenido {{user.first_name}}!</h6>

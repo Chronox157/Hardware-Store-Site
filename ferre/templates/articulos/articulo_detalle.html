@@ -47,9 +47,16 @@
     </div>
     <div class="col">
         <div class="card">
+            {% if post.body %}
             <div class="card-body">
                 {{post.body|safe}}
             </div>
+            {% else %}
+            <div class="card-body">
+                {{post.specs|safe}}
+            </div>
+            {% endif %}
+
             <div class="container">
                 <h6 class="text-muted">De: {{post.autor}}</h6>
                 <br>

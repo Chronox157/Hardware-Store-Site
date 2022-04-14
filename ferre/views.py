@@ -1,5 +1,6 @@
 from multiprocessing import context
 from re import template
+from urllib import request
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -12,6 +13,19 @@ class HomeView(ListView):
     model = Articulo
     template_name = "home.html"
     ordering = ['-fecha_pub']
+
+def BuscarArticuloView(request):
+    #busqueda = None
+    if request.method == "POST":
+        busqueda = request.POST.get('busqueda', False)
+        resultados = Articulo.objects.filter(titulo__icontains=busqueda)
+        context = {'busqueda' : busqueda, 'resultados' : resultados}
+
+        return render(request, "articulos/buscar_articulo.html", context)
+
+    else:
+        return render(request, "articulos/buscar_articulo.html", {})
+ 
 
 
 class ArticuloView(DetailView):
