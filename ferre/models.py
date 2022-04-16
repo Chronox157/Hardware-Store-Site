@@ -25,3 +25,11 @@ class Articulo(models.Model):
             return self.img.url
         else:
             return None
+
+class Publicacion(Articulo):
+    
+        def get_absolute_url(self):
+            return reverse("publicacion", kwargs={"pk": self.pk})
+
+        class Meta:
+            verbose_name_plural = "Publicaciones"

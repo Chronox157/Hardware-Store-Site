@@ -1,46 +1,54 @@
 {% extends 'base.html' %}
 
-{% block busquedabar %}
-<li class="nav-item">
-    <form class="d-flex" method=POST action="{% url 'buscarArt' %}">
-      {% csrf_token %}
-
-      <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="busqueda">
-      <button class="btn btn-outline-secondary" type="submit">Buscar</button>
-    </form>
-</li>
-{% endblock busquedabar %}
-
 {% block content %}
- 
-{% if object_list %}
-<div class="row row-cols-1 row-cols-md-3">
-    {% for post in object_list %}
-                <div class="container" style="height: 700px">
-                    <div class="card" style="width: 26rem; height: 674px">
+<div class="row">
+    <div class="col">
+            <div class="btn btn-primary btn-lg disabled">
+                <h2>Bienvenido a TuFerre.uy!</h2>
+            </div>
+            <br><br>
+        <h3 class="text-muted">Una comunidad online donde encontrar los mejores precios.</h3>
+        <div class='image-fluid' >
+            <img src="static\img\6220_20190806150317.jpg" alt="" style="object-fit: cover; width: 600px; height: 100%;">
+        </div>
+    </div>
+
+    <div class="col">
+        <center>
+            <div class="btn btn-warning btn-lg disabled">
+                <h4>Últimas publicaciones</h4>
+            </div>
+        </center>
+        <br>
+        <div class="row row-cols-2 row-cols-md-3">
+            {% if art %}
+            
+                {% for post in art  %}
+                <div class="container" style="height: 580px">
+                    <div class="card" style="width: 13rem; height: 337px">
                         <div class="card-header">
                             <h3 class="card-title">{{post.titulo}}</h3>
                             <h5 class="text-muted">$ {{post.precio}}</h5>
                         </div>
-
+    
                         <div class="card-body">
                             <p class="card-text">{{post.specs}}</p>
                             <a href={% url 'articulo' post.pk %} class="btn btn-primary">Detalles</a>
                         </div>
-
+    
                         {% if post.get_img_url != None %}
                         <div class="card-img-bottom">
-                            <img src="{{post.get_img_url}}" class="img-fluid" alt=" " style="object-fit: cover; width: 100%; height: 400px;">
+                            <img src="{{post.get_img_url}}" class="img-fluid" alt=" " style="object-fit: cover; width: 100%; height: 200px;">
                         </div>
                         {% endif %}
-
+    
                         <br>
                         <div class="card-footer">
                             <div class="row">
                                 <div class="container col">
                                     <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
                                 </div>
-
+    
                                 <div class="container col">
                                     <h6 class="text-end">De: {{post.autor}}</h6>
                                 </div>
@@ -48,15 +56,27 @@
                         </div>
                     
                     </div>
-                    <br><br>
+                    
                 </div>    
+    
+                {% endfor %}
+            {% else %}
+                <h3 class="text-muted">No hay elementos para mostrar</h3>
+            {% endif %}
+        </div>
+        <center>
+            <a class="btn btn-secondary btn-lg" href={% url 'lista_articulos' %}>
+                    <h4>Ver {{rest}} publicaciones mas</h4>
+            </a>
+        </center>
+    
+    </div>
+    <br><br>
 
-    {% endfor %}
 </div>
-{% else %}
-    <center>
-        <h3 class="text-muted">No hay elementos para mostrar</h3>
-    </center>
-{% endif %}
+
+<div class="row">
+
+</div>
 
 {% endblock content %}

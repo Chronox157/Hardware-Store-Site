@@ -6,12 +6,12 @@
     
 <div class="row">
     <div class="col-3">
-        <a class="btn btn-outline-primary" href={% url 'home' %}>Volver</a>
+        <a class="btn btn-outline-primary" href={% url 'lista_articulos' %}>Volver</a>
     </div>
     {% comment %} 
     Si el usuario logeado es quien publicó, puede editar y eliminar
     {% endcomment %}
-    {% if user.is_authenticated and user == post.autor or user.is_authenticated and user.is_superuser%}
+    {% if user.is_authenticated and user == post.autor%}
         <div class="col-1">
             <a class="btn btn-outline-secondary " href={% url 'editarArt' post.pk %}>Editar</a>
         </div>

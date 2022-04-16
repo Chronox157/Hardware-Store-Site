@@ -1,17 +1,28 @@
 from multiprocessing import context
 from re import template
+from this import d
 from urllib import request
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from ferre.models import Articulo
+from ferre.models import Articulo, Publicacion
 from .forms import ArticuloForm
 import calendar
 
 
-class HomeView(ListView):
+def HomeView(request):
+    articulos = Articulo.objects.all()[0:3]
+    restantes = Articulo.objects.all().count() - 3
+    dicc = {
+        "art" : articulos,
+        "rest" : restantes
+    }
+
+    return render(request, "home.html", dicc)
+
+class MenuArticulos(ListView):
     model = Articulo
-    template_name = "home.html"
+    template_name = "articulos/lista_articulos.html"
     ordering = ['-fecha_pub']
 
 def BuscarArticuloView(request):
@@ -26,8 +37,6 @@ def BuscarArticuloView(request):
     else:
         return render(request, "articulos/buscar_articulo.html", {})
  
-
-
 class ArticuloView(DetailView):
     model = Articulo
     template_name = "articulos/articulo_detalle.html"
@@ -52,6 +61,12 @@ class EliminarArticuloView(DeleteView):
     model = Articulo
     template_name = 'articulos/eliminar_articulo.html'
     success_url = reverse_lazy('home')
+
+class MenuPubli(ListView):
+    model = Publicacion
+    template_name = "publicaciones/lista_publi.html"
+    ordering = ['-fecha_pub']
+
 
 
 def MiPerfil(request):
