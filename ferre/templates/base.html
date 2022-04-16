@@ -23,22 +23,14 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
+              <li>
+                <a class="nav-link" href={% url 'crearArt' %}>Foro</a>
+              </li>
               <li class="nav-item">
                 {% if user.is_authenticated %}
                 <a class="nav-link" href={% url 'crearArt' %}>Publicar</a>
-                {% else %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Publicar
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href={% url 'login' %}>DEBES INICIAR SESIÓN PARA HACER ESO</a>
-                  </ul>
-
-                </li>
-                {% endif %}
-
               </li>
+                {% endif %}
               {% block busquedabar %}
               {% endblock busquedabar %}
             </ul>
@@ -47,7 +39,8 @@
             <div style="padding-left: 20px;">
               <a class="btn btn-outline-info" href="">Mi Perfil</a>
             </div>
-            <div style="padding-left: 10px;">
+            <br>
+            <div style="padding-left: 20px;">
               <a class="btn btn-outline-danger" href={% url 'logout' %}>Salir</a>
             </div>
             {% else %}
