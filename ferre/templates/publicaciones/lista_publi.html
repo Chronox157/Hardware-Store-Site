@@ -1,2 +1,149 @@
 {% extends 'base.html' %}
 
+{% block content %}
+    {% if user.is_authenticated %}
+        <center>
+            <div class="container">
+                <a href={% url 'crearPubli'%} class="btn btn-primary btn-lg">Publica algo!</a>
+                <br>
+            </div>
+            <br>
+        </center>
+    {% else %}
+        <center>
+            <div class="container">
+                <a href={% url 'login'%} class="btn btn-primary btn-lg">Publica algo!</a>
+                <br>
+            </div>
+            <br>
+        </center>
+    {% endif %}
+
+    <div class="row">
+        <div class="col">
+            <center>
+                <div class="btn btn-primary btn-lg disabled">
+                    <h4>Trabajos - Servicios</h4>
+                </div>
+            </center>
+            <hr>
+        </div>
+        <div class="col">
+            <center>
+                <div class="btn btn-primary btn-lg disabled">
+                    <h4>Preguntas y Ayuda</h4>
+                </div>
+            </center>
+            <hr>
+        </div>
+        <div class="col">
+            <center>
+                <div class="btn btn-primary btn-lg disabled">
+                    <h4>General</h4>
+                </div>
+            </center>
+            <hr>
+        </div>
+        {% if object_list %}
+        <div class="row">
+            <div class="col" style="padding-left: 20px;">
+                {% comment %} 
+                Si se publicó en seccion Trabajo/Serv
+                {% endcomment %}
+                {% for post in Trabajo_Serv %}
+                    {% if post.tipo == "Trabajo/Serv" %}
+                        <div class="card" style="width: 25rem; height: 160px">
+                            <div class="card-header">
+                                <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">{{post.specs}}</p>
+                            </div>
+
+                            <br>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="container col">
+                                        <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                    </div>
+
+                                    <div class="container col">
+                                        <h6 class="text-end">De: {{post.autor}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <br>
+                {% endfor %}
+                
+            </div>
+            <div class="col" style="padding-left: 20px;">
+                {% comment %} 
+                Si se publicó en seccion preguntas
+                {% endcomment %}
+                {% for post in Pregunta %}
+                    {% if post.tipo == "Pregunta" %}
+                        
+                        <div class="card" style="width: 25rem; height: 160px">
+                            <div class="card-header">
+                                <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">{{post.specs}}</p>
+                            </div>
+
+                            <br>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="container col">
+                                        <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                    </div>
+
+                                    <div class="container col">
+                                        <h6 class="text-end">De: {{post.autor}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col" style="padding-left: 20px;">
+                {% for post in General %}
+                    {% if post.tipo == "General" %}
+                        <div class="card" style="width: 25rem; height: 160px">
+                            <div class="card-header">
+                                <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">{{post.specs}}</p>
+                            </div>
+
+                            <br>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="container col">
+                                        <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                    </div>
+
+                                    <div class="container col">
+                                        <h6 class="text-end">De: {{post.autor}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <br>
+                {% endfor %}
+            </div>
+    {% endif %}
+
+    
+
+
+{% endblock content %}

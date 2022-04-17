@@ -1,24 +1,24 @@
-from multiprocessing import context
-from re import template
-from this import d
-from urllib import request
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from ferre.models import Articulo, Publicacion
-from .forms import ArticuloForm
-import calendar
+from .forms import ArticuloForm, PublicacionForm
+
 
 
 def HomeView(request):
-    articulos = Articulo.objects.all()[0:3]
-    restantes = Articulo.objects.all().count() - 3
-    dicc = {
-        "art" : articulos,
-        "rest" : restantes
-    }
-
-    return render(request, "home.html", dicc)
+        articulos = Articulo.objects.all()[0:3]
+        restantes = Articulo.objects.all().count() - 3
+        
+        if restantes < 0:
+            restantes = 0
+        dicc = {
+            "art" : articulos,
+            "rest" : restantes
+        }
+        
+        return render(request, "home.html", dicc)
 
 class MenuArticulos(ListView):
     model = Articulo
@@ -66,6 +66,38 @@ class MenuPubli(ListView):
     model = Publicacion
     template_name = "publicaciones/lista_publi.html"
     ordering = ['-fecha_pub']
+
+    def get_context_data(self, **kwargs):
+
+        dicc = super().get_context_data(**kwargs)
+        dicc["Trabajo_Serv"] = Publicacion.objects.filter(tipo__contains="Trabajo/Serv")
+        dicc["Pregunta"] = Publicacion.objects.filter(tipo__contains="Pregunta")
+        dicc["General"] = Publicacion.objects.filter(tipo__contains="General")
+
+        return dicc 
+
+
+
+
+class PublicacionView(DetailView):
+    model = Publicacion
+    template_name = "publicaciones/publi_detalle.html"
+    context_object_name = 'post'
+
+class EditarPubliView(UpdateView):
+    model = Publicacion
+    form_class = PublicacionForm
+    template_name = 'publicaciones\editar_publi.html'
+    context_object_name = 'post'
+
+class CrearPubliView(CreateView):
+    model = Publicacion
+    form_class = PublicacionForm
+    template_name = "articulos/crear_articulo.html"
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
 
 
 

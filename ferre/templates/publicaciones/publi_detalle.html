@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-3">
+        <a class="btn btn-outline-primary" href={% url 'lista_publi' %}>Volver</a>
+    </div>
+    {% comment %} 
+    Si el usuario logeado es quien publicó, puede editar y eliminar
+    {% endcomment %}
+    {% if user.is_authenticated and user == post.autor%}
+        <div class="col-1">
+            <a class="btn btn-outline-secondary " href={% url 'editarPubli' post.pk %}>Editar</a>
+        </div>
+        <div class="col-1">
+            <a class="btn btn-outline-danger" href={% url 'eliminarArt' post.pk %}>Eliminar</a>
+        </div>
+    {% else %}
+    {% endif %}
+    <br><br>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h2>
+                <u>{{post.titulo}}</u>
+            </h2>
+            <br>
+            <div class="d-inline-flex">
+                <div class="container">
+                    <h5 class="">Por: {{post.autor}}</h5>
+                    <h6 class="text-muted">{{post.fecha_pub}}</h6>
+                </div>
+                <div class="justify-content-end">
+                    <div class="btn btn-info btn-lg disabled">
+                        {{post.tipo}}
+                    </div>
+                        
+                </div>
+            </div>
+            <hr>
+            {{post.specs|safe}}
+        </div>
+        <div class="col">
+            {% if post.get_img_url != None %}
+                <center>
+                    <img class="card shadow" style="width: 400px; height: 100%" src={{post.get_img_url}} alt=" ">
+                </center>
+            {% endif %}
+        </div>
+        <br>
+        <hr>
+    </div>
+    <div class="card">
+        {{post.body|safe}}
+    </div>
+
+{% endblock content %}
+
+
+</div>
