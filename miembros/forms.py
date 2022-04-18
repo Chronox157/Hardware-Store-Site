@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 
 from ferre.models import Perfil
+from miembros.models import ComentarioArticulo
 
 class RegistrarseForm(UserCreationForm):
 
@@ -50,3 +51,4 @@ class EditarPerfilForm(UserChangeForm):
         self.fields['bio'].widget.attrs['class'] = 'form-control'
         self.fields['img_perfil'].widget.attrs['class'] = 'form-control'
         self.fields['sitio_web'].widget.attrs['class'] = 'form-control'
+

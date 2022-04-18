@@ -9,4 +9,5 @@ path("editar_usuario/", EditarUsuarioView.as_view(), name="editarUser"),
 path("editar_usuario/perfil", EditarPerfilView.as_view(), name="editarPerf"),
 path("password/", auth_view.PasswordChangeView.as_view()),
 
+
 ]

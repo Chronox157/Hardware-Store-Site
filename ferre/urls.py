@@ -16,6 +16,6 @@ urlpatterns = [
     path("publiacion/editar/<int:pk>", EditarPubliView.as_view(), name="editarPubli"),
     path("publicacion/crear/", CrearPubliView.as_view(), name="crearPubli"),
     path("publicacion/eliminar/<int:pk>", EliminarPubliView.as_view(), name="eliminarPubli"),
-    path("miperfil/", views.MiPerfil, name="miperfil"),
+
 
 ]

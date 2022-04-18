@@ -1,8 +1,9 @@
 from re import template
+from xml.etree.ElementTree import Comment
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserChangeForm
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
 from ferre.models import Articulo, Perfil
 from .forms import RegistrarseForm, EditarUsuarioForm, EditarPerfilForm
@@ -29,11 +30,6 @@ class EditarPerfilView(generic.UpdateView):
     def get_object(self):
         return self.request.user.perfil
 
-
-# class VerUsuarioView(generic.ListView):
-#     model = Perfil
-#     template_name = "perfil/ver_perfil.html"
-#     context_name = "post"
 
 def VerUsuarioView(request, id):
     usuario = User.objects.get(id = id)

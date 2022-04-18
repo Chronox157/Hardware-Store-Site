@@ -114,7 +114,11 @@
                     <div class="d-inline-flex">
                         <div>
                             <a href={% url 'usuario' id=post.autor.id %}>
-                                <img class="card shadow" style="width: 100px; height: 100%" src="{{post.autor.perfil.img_perfil.url}}" alt=" "> 
+                                {% if post.autor.perfil.img != None %}
+                                    <img class="card shadow" style="width: 100px; height: 100%" src="{{post.autor.perfil.img_perfil.url}}" alt=" ">     
+                                {% else %}
+                                    <img class="card shadow" style="width: 100px; height: 100%" src="\static\img\perfil.jpg" alt=" ">     
+                                {% endif %}
                             </a>
                         </div>
                         <div class="card card-body">
@@ -127,6 +131,8 @@
                 </div>
                 <br>
                 {% endfor %}
+            {% else %}
+            <h3 class="text-muted">No hay publicaciones para mostrar</h3>
             {% endif %}
         </div>
     </div>

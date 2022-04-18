@@ -114,7 +114,3 @@ class EliminarPubliView(DeleteView):
     success_url = reverse_lazy('lista_publi')
     context_object_name = 'post'
 
-
-def MiPerfil(request):
-    return render(request, "miperfil.html", {})
-    

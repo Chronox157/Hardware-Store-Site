@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form class="d-flex" method=POST action=""> 
+    {% csrf_token %}
+
+    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="comentario">
+    <button class="btn btn-outline-secondary" type="submit">Comentar</button>
+  </form>
+
+  {{comentario}}
+
+  {{articulo.titulo}}
+{% endblock content %}
+
