@@ -1,22 +1,115 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Editar perfil</h1>
+    <h1>Ver perfil</h1>
     <div class="row">
         <div class="col-2">
-            <a class="btn btn-outline-primary" href={% url 'lista_publi' %}>Volver</a>
+            <input class="btn btn-outline-primary" type=button value="Volver" onClick="javascript:history.go(-1);">
+
         </div>
+        {% if user.id == usuario_vista.id %}
+        <div class="col-1">
+            <a class="btn btn-outline-secondary " href={% url 'editarUser' %}>Editar</a>
+        </div>
+        {% endif %}
     </div>
     <hr>
     <br>
     {% if user.is_authenticated %}
 
-        <div class="card">
-            <div class="card-title">
-                <h3>{{post}}</h3>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card d-inline-flex">
+                            
+                                <img class="card shadow" style="width: 300px; height: 100%" src={{usuario_vista.perfil.get_img_url}} alt=" ">    
+
+                            <div class="card-header" style="padding-left: 20px">
+                                <h3>{{usuario_vista.get_full_name}}</h3>
+                                <h5 class="text-muted">{{usuario_vista.email}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        {% if usuario_vista.is_staff %}
+                            <center>
+                                <h3 class="btn btn-warning btn-lg">Proveedor</h3>   
+                            </center>
+                        {% else %}
+                            <center>
+                                <h3 class="btn btn-secondary btn-lg">Usuario</h3>   
+                            </center>
+                        {% endif %}
+                        <br>
+                        <h4>Miembro desde:</h4>
+                        <h5 class="text-muted">{{usuario_vista.date_joined}}</h5>
+
+
+                        {% if usuario_vista.perfil.sitio_web != None %}
+                            <a href={{usuario_vista.perfil.get_weburl}} class="btn btn-primary">Ver sitio web</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if usuario_vista.is_staff and productos != None %}
+                <br><br>
+                    <div class="">
+                        <div class="card card-header">
+                            <h3>Nuestros productos</h3>
+                        </div>
+                        <br>
+                        <div class=""></div>
+                        <ul>
+                            {% for post in productos %}
+                            <div class="container" style="height: 700px">
+                                <div class="card" style="width: 32rem; height: 674px">
+                                    <div class="card-header">
+                                        <h3 class="card-title">{{post.titulo}}</h3>
+                                        <h5 class="text-muted">$ {{post.precio}}</h5>
+                                    </div>
+            
+                                    <div class="card-body">
+                                        <p class="card-text">{{post.specs}}</p>
+                                        <a href={% url 'articulo' post.pk %} class="btn btn-primary">Detalles</a>
+                                    </div>
+            
+                                    {% if post.get_img_url != None %}
+                                    <div class="card-img-bottom">
+                                        <img src="{{post.get_img_url}}" class="img-fluid" alt=" " style="object-fit: cover; width: 100%; height: 400px;">
+                                    </div>
+                                    {% endif %}
+            
+                                    <br>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="container col">
+                                                <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                            </div>
+            
+                                            <div class="container col">
+                                                <h6 class="text-end">De: {{post.autor}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <br><br>
+                            </div>    
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card card-body">
+                        {{usuario_vista.perfil.bio|safe}}
+                    </div>
+                </div>
             </div>
         </div>
-
-
+    {% else %}
+        <h3 class="text-muted">Debes iniciar sesión para ver perfiles</h3>
     {% endif %}
 {% endblock content %}

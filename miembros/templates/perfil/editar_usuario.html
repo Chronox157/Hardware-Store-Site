@@ -6,14 +6,19 @@
 
 
 
-<h1>Editar perfil</h1>
+<h1>Editar usuario</h1>
 <div class="row">
 
     <div class="d-inline-flex">
         <div class="col-2">
             <input class="btn btn-outline-primary" type=button value="Volver" onClick="javascript:history.go(-1);">
         </div>
-
+        <div>
+            <h6 class="text-muted" style="padding-right: 20px">(Editar imagen, bio, sitio web)</h6>
+        </div>
+        <div>
+            <a class="btn btn-info" href={% url 'editarPerf' %}>Editar perfil</a>
+        </div>
     </div>
 </div>
 <hr>
@@ -22,7 +27,6 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
-            {{form.media}}
             {{form.as_table}}
 
         </table>

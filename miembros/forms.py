@@ -2,6 +2,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
+from ferre.models import Perfil
+
 class RegistrarseForm(UserCreationForm):
 
     class Meta:
@@ -20,18 +22,31 @@ class RegistrarseForm(UserCreationForm):
 
 
 
-class EditarPerfilForm(UserChangeForm):
+class EditarUsuarioForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    nombre= forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
-    apellido = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name= forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
-    #last_login = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
-    #is_superuser = forms.CharField(max_length=100, widget=forms.CheckboxInput(attrs={'class':'form-check'}))
-    #is_staff = forms.CharField(max_length=100, widget=forms.CheckboxInput(attrs={'class':'form-check'}))
-    #is_active = forms.CharField(max_length=100, widget=forms.CheckboxInput(attrs={'class':'form-check'}))
-    #date_joined = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
+
     
+    def __init__(self, *args, **kwargs):
+        super(EditarUsuarioForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].label = "Nombre"
+        self.fields['last_name'].label = "Apellido"
 
     class Meta:
         model = User
-        fields = ('nombre', 'apellido', 'email', 'username')
+        fields = ('first_name', 'last_name', 'email', 'username')
+
+class EditarPerfilForm(UserChangeForm):
+    
+    class Meta:
+        model = Perfil
+        fields = ('bio', 'img_perfil', 'sitio_web')
+
+    def __init__(self, *args, **kwargs):
+        super(EditarPerfilForm, self).__init__(*args, **kwargs)
+
+        self.fields['bio'].widget.attrs['class'] = 'form-control'
+        self.fields['img_perfil'].widget.attrs['class'] = 'form-control'
+        self.fields['sitio_web'].widget.attrs['class'] = 'form-control'

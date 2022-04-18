@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Editar artículo{% endblock title %}
+{% block title %}Publicar artículo{% endblock title %}
 
 {% block content %}
 
-{% if user.is_authenticated and user.id == post.autor.id %}
-    <h1>Editar artículo</h1>
+{% if user.is_authenticated %}
+    <h1>Publicar</h1>
     <div class="row">
         <div class="col-2">
             <input class="btn btn-outline-primary" type=button value="Volver" onClick="javascript:history.go(-1);">
@@ -18,11 +18,13 @@
             {% csrf_token %}
             {{form.media}}
             {{form.as_p}}
-            <button class="btn btn-outline-success">Editar</button>
+            <button class="btn btn-outline-success">Publicar</button>
         </form>
     </div>
 {% else %}
-    <h3 class="text-muted">No puedes hacer eso sin iniciar sesión</h3>
+    <h3 class="text-muted">Debes haber iniciado sesión como proveedor para publicar en esta sección</h3>
+    <h3 class="text-muted">Si crees que algo va mal contactanos en admin@tuferre.com.uy</h3>
 {% endif %}
+
 
 {% endblock content %}

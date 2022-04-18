@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="col-3">
-        <a class="btn btn-outline-primary" href={% url 'lista_publi' %}>Volver</a>
+        <input class="btn btn-outline-primary" type=button value="Volver" onClick="javascript:history.go(-1);">
     </div>
     {% comment %} 
     Si el usuario logeado es quien publicó, puede editar y eliminar
@@ -26,21 +26,19 @@
             </h2>
             <br>
             <div class="d-inline-flex">
-                <div class="container">
-                    <a class="" href={% url 'usuario' id=post.autor.id %}>Por: {{post.autor}}</a>
-                    <h6 class="text-muted">{{post.fecha_pub}}</h6>
-                </div>
                 <div class="justify-content-end">
                     <div class="btn btn-info btn-lg disabled">
                         {{post.tipo}}
                     </div>
                         
                 </div>
+                <div class="container">
+                    <a class="" href={% url 'usuario' id=post.autor.id %}>Por: {{post.autor}}</a>
+                    <h6 class="text-muted">{{post.fecha_pub}}</h6>
+                </div>
             </div>
             <hr>
             {{post.specs|safe}}
-            {{post.autor.id}}
-            {{user.id}}
         </div>
         <div class="col">
             {% if post.get_img_url != None %}
@@ -48,6 +46,7 @@
                     <img class="card shadow" style="width: 400px; height: 100%" src={{post.get_img_url}} alt=" ">
                 </center>
             {% endif %}
+            <br>
         </div>
         <br>
         <hr>

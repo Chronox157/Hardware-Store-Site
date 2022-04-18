@@ -66,7 +66,7 @@
         </div>
         <center>
             <a class="btn btn-secondary btn-lg" href={% url 'lista_articulos' %}>
-                    <h4>Ver {{rest}} publicaciones mas</h4>
+                    <h4>Ver {{art_rest}} publicaciones mas</h4>
             </a>
         </center>
     
@@ -77,13 +77,57 @@
 
 <div class="row">
     <div class="col">
-        <div class="card">
+        <div class="">
             <div class="card-title">
                 <center>
                     <br>
                     <a class="btn btn-primary btn-lg" href={% url 'lista_publi' %}>Mira los últimos aportes de la comunidad</a>
                 </center>
             </div>
+
+            {% if publi %}
+                {% for post in publi %}
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-inline-flex">
+                            <div style="padding-right: 10px">
+                                {% if post.autor.is_staff %}
+                                <center>
+                                    <a style="padding-right: 20px" href={% url 'usuario' id=post.autor.id %}>
+                                        <h6 class="btn btn-warning btn-sm">Proveedor</h6>   
+                                    </a>
+                                </center>
+                                {% else %}
+                                <center>
+                                    <a style="padding-right: 10px" href={% url 'usuario' id=post.autor.id %}>
+                                        <h6 class="btn btn-secondary btn-sm">Usuario</h6>   
+                                    </a>
+                                </center>
+                                {% endif %}
+                            </div>
+                            {{post.autor.get_full_name}} | 
+                            {{post.tipo}} | 
+                            {{post.fecha_pub}}
+                        </div>
+                    </div>
+                    <div class="d-inline-flex">
+                        <div>
+                            <a href={% url 'usuario' id=post.autor.id %}>
+                                <img class="card shadow" style="width: 100px; height: 100%" src="{{post.autor.perfil.img_perfil.url}}" alt=" "> 
+                            </a>
+                        </div>
+                        <div class="card card-body">
+                            <a href={% url 'publicacion' post.pk %}>
+                                <h4>{{post.titulo}}</h4>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
     <div class="col">

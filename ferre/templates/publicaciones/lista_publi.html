@@ -44,14 +44,14 @@
             </center>
             <hr>
         </div>
-        {% if object_list %}
+        
         <div class="row">
             <div class="col" style="padding-left: 20px;">
                 {% comment %} 
                 Si se publicó en seccion Trabajo/Serv
                 {% endcomment %}
-                {% for post in Trabajo_Serv %}
-                    {% if post.tipo == "Trabajo/Serv" %}
+                {% if Trabajo_Serv %}
+                    {% for post in Trabajo_Serv %}
                         <div class="card" style="width: 25rem; height: 160px">
                             <div class="card-header">
                                 <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
@@ -69,79 +69,88 @@
                                     </div>
 
                                     <div class="container col">
-                                        <h6 class="text-end">De: {{post.autor}}</h6>
+                                        <a href={% url 'usuario' id=post.autor.id %}>
+                                            <h6 class="text-end">De: {{post.autor}}</h6>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
-                    <br>
-                {% endfor %}
+                        <br>
+                    {% endfor %}
+                {% endif %}
                 
             </div>
             <div class="col" style="padding-left: 20px;">
                 {% comment %} 
                 Si se publicó en seccion preguntas
                 {% endcomment %}
+                {% if Pregunta %}
                 {% for post in Pregunta %}
-                    {% if post.tipo == "Pregunta" %}
-                        
-                        <div class="card" style="width: 25rem; height: 160px">
-                            <div class="card-header">
-                                <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
-                            </div>
+                    <div class="card" style="width: 25rem; height: 160px">
+                        <div class="card-header">
+                            <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
+                        </div>
 
-                            <div class="card-body">
-                                <p class="card-text">{{post.specs}}</p>
-                            </div>
+                        <div class="card-body">
+                            <p class="card-text">{{post.specs}}</p>
+                        </div>
 
-                            <br>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="container col">
-                                        <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
-                                    </div>
+                        <br>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="container col">
+                                    <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                </div>
 
-                                    <div class="container col">
+                                <div class="container col">
+                                    <a href={% url 'usuario' id=post.autor.id %}>
                                         <h6 class="text-end">De: {{post.autor}}</h6>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
+                    </div>
                     <br>
                 {% endfor %}
+            {% endif %}
             </div>
             <div class="col" style="padding-left: 20px;">
+                {% comment %} 
+                Si se publicó en seccion preguntas
+                {% endcomment %}
+                {% if General %}
                 {% for post in General %}
-                    {% if post.tipo == "General" %}
-                        <div class="card" style="width: 25rem; height: 160px">
-                            <div class="card-header">
-                                <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
-                            </div>
+                    <div class="card" style="width: 25rem; height: 160px">
+                        <div class="card-header">
+                            <a class="link-info" href={% url 'publicacion' post.pk %}>{{post.titulo}}</a>
+                        </div>
 
-                            <div class="card-body">
-                                <p class="card-text">{{post.specs}}</p>
-                            </div>
+                        <div class="card-body">
+                            <p class="card-text">{{post.specs}}</p>
+                        </div>
 
-                            <br>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="container col">
-                                        <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
-                                    </div>
+                        <br>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="container col">
+                                    <h6 class="text-muted text-start">{{post.fecha_pub}}</h6>
+                                </div>
 
-                                    <div class="container col">
+                                <div class="container col">
+                                    <a href={% url 'usuario' id=post.autor.id %}>
                                         <h6 class="text-end">De: {{post.autor}}</h6>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
+                    </div>
                     <br>
                 {% endfor %}
+            {% endif %}
             </div>
-    {% endif %}
+        </div>
+
 
     
 

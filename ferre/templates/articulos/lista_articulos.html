@@ -13,6 +13,18 @@
 
 {% block content %}
  
+{% if user.is_authenticated and user.is_staff%}
+    <div class="d-inline-flex">
+        <h3 style="padding-right: 20px">
+            Bienvenido {{user.first_name}}!
+        </h3>
+        <a href={% url 'crearArt'%} class="btn btn-primary" >Publicar</a>
+
+    </div>
+    <br>
+    <br>
+{% endif %}
+
 {% if object_list %}
 <div class="row row-cols-1 row-cols-md-3">
     {% for post in object_list %}

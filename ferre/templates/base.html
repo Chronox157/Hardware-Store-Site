@@ -29,18 +29,14 @@
               <li>
                 <a class="nav-link" href={% url 'lista_publi' %}>Foro</a>
               </li>
-              <li class="nav-item">
-                {% if user.is_authenticated %}
-                <a class="nav-link" href={% url 'crearArt' %}>Publicar</a>
-              </li>
-                {% endif %}
+
               {% block busquedabar %}
               {% endblock busquedabar %}
             </ul>
             {% if user.is_authenticated %}
             <h6 style="color: white;">Bienvenido {{user.first_name}}!</h6>
             <div style="padding-left: 20px;">
-              <a class="btn btn-outline-info" href={% url 'editarPerf' %}>Mi Perfil</a>
+              <a class="btn btn-outline-info" href={% url 'usuario' id=user.id %}>Mi Perfil</a>
             </div>
             <br>
             <div style="padding-left: 20px;">

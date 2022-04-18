@@ -9,15 +9,24 @@ from .forms import ArticuloForm, PublicacionForm
 
 def HomeView(request):
         articulos = Articulo.objects.all()[0:3]
-        restantes = Articulo.objects.all().count() - 3
+        art_restantes = Articulo.objects.all().count() - 3
+
+        publicaciones = Publicacion.objects.all()[0:5]
+        publi_restantes = Publicacion.objects.all().count() - 5
+
         
-        if restantes < 0:
-            restantes = 0
+        
+        if art_restantes < 0:
+            art_restantes = 0
         dicc = {
             "art" : articulos,
-            "rest" : restantes
+            "art_rest" : art_restantes,
+            "publi" : publicaciones,
+            "publi_rest": publi_restantes
         }
         
+        ordering = ['-fecha_pub']
+
         return render(request, "home.html", dicc)
 
 class MenuArticulos(ListView):
@@ -93,7 +102,7 @@ class EditarPubliView(UpdateView):
 class CrearPubliView(CreateView):
     model = Publicacion
     form_class = PublicacionForm
-    template_name = "articulos/crear_articulo.html"
+    template_name = "publicaciones/crear_publi.html"
 
     def form_valid(self, form):
         form.instance.autor = self.request.user

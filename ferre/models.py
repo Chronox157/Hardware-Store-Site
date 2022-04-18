@@ -1,7 +1,10 @@
+from email.policy import default
 from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.urls import path, reverse
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from ckeditor.fields import RichTextField
 from datetime import datetime, date
 
@@ -59,6 +62,29 @@ class Publicacion(models.Model):
 class Perfil(models.Model):
     usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = RichTextField(blank=True,null=True)
+    img_perfil = models.ImageField(null=True, blank=True, upload_to="img/perfil")
+    sitio_web = models.URLField(null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Perfiles"
+
+    def get_weburl(self):
+        return str(self.sitio_web)
+
+    def get_img_url(self):
+        if self.img_perfil and hasattr(self.img_perfil, 'url'):
+            return self.img_perfil.url
+        else:
+            return str("static\img\perfil.jpg")
 
     def __str__(self):
         return str(self.usuario)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Perfil.objects.create(usuario=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.perfil.save()
