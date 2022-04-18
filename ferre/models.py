@@ -75,7 +75,7 @@ class Perfil(models.Model):
         if self.img_perfil and hasattr(self.img_perfil, 'url'):
             return self.img_perfil.url
         else:
-            return str("static\img\perfil.jpg")
+            return None
 
     def __str__(self):
         return str(self.usuario)
