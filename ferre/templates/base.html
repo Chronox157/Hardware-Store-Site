@@ -40,7 +40,7 @@
             {% if user.is_authenticated %}
             <h6 style="color: white;">Bienvenido {{user.first_name}}!</h6>
             <div style="padding-left: 20px;">
-              <a class="btn btn-outline-info" href="">Mi Perfil</a>
+              <a class="btn btn-outline-info" href={% url 'editarPerf' %}>Mi Perfil</a>
             </div>
             <br>
             <div style="padding-left: 20px;">

@@ -36,7 +36,7 @@ class Publicacion(models.Model):
     titulo = models.CharField(max_length=255)
     img = models.ImageField(null=True, blank=True, upload_to = "img")
     specs = models.TextField()
-    autor = models.ForeignKey(User, on_delete=models.CASCADE, default="admin")
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True,null=True)
     fecha_pub = models.DateField(auto_now_add=True)
     tipo = models.CharField(max_length=13, choices=Tipo_pub, default='General')
@@ -55,3 +55,10 @@ class Publicacion(models.Model):
 
     class Meta:
         verbose_name_plural = "Publicaciones"
+
+class Perfil(models.Model):
+    usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = RichTextField(blank=True,null=True)
+
+    def __str__(self):
+        return str(self.usuario)

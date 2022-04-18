@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.id == post.autor.id %}
     <h1>Eliminar publicacion</h1>
     <div class="row">
         <div class="col-2">

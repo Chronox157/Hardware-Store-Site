@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CrearPubliView, EditarArticuloView, HomeView, ArticuloView, CrearArticuloView, EliminarArticuloView, BuscarArticuloView, MenuArticulos, MenuPubli, PublicacionView, EditarPubliView
+from .views import EliminarPubliView, CrearPubliView, EditarArticuloView, HomeView, ArticuloView, CrearArticuloView, EliminarArticuloView, BuscarArticuloView, MenuArticulos, MenuPubli, PublicacionView, EditarPubliView
 from . import views
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path("publicacion/<int:pk>/", PublicacionView.as_view(), name="publicacion"),
     path("publiacion/editar/<int:pk>", EditarPubliView.as_view(), name="editarPubli"),
     path("publicacion/crear/", CrearPubliView.as_view(), name="crearPubli"),
+    path("publicacion/eliminar/<int:pk>", EliminarPubliView.as_view(), name="eliminarPubli"),
     path("miperfil/", views.MiPerfil, name="miperfil"),
 
 ]

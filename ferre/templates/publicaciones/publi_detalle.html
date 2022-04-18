@@ -8,12 +8,12 @@
     {% comment %} 
     Si el usuario logeado es quien publicó, puede editar y eliminar
     {% endcomment %}
-    {% if user.is_authenticated and user == post.autor%}
+    {% if user.is_authenticated and user == post.autor %}
         <div class="col-1">
             <a class="btn btn-outline-secondary " href={% url 'editarPubli' post.pk %}>Editar</a>
         </div>
         <div class="col-1">
-            <a class="btn btn-outline-danger" href={% url 'eliminarArt' post.pk %}>Eliminar</a>
+            <a class="btn btn-outline-danger" href={% url 'eliminarPubli' post.pk %}>Eliminar</a>
         </div>
     {% else %}
     {% endif %}
@@ -27,7 +27,7 @@
             <br>
             <div class="d-inline-flex">
                 <div class="container">
-                    <h5 class="">Por: {{post.autor}}</h5>
+                    <a class="" href={% url 'usuario' id=post.autor.id %}>Por: {{post.autor}}</a>
                     <h6 class="text-muted">{{post.fecha_pub}}</h6>
                 </div>
                 <div class="justify-content-end">
@@ -39,6 +39,8 @@
             </div>
             <hr>
             {{post.specs|safe}}
+            {{post.autor.id}}
+            {{user.id}}
         </div>
         <div class="col">
             {% if post.get_img_url != None %}

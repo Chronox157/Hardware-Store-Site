@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from ferre.models import Articulo, Publicacion
 from .forms import ArticuloForm, PublicacionForm
 
-
+###Articulos
 
 def HomeView(request):
         articulos = Articulo.objects.all()[0:3]
@@ -61,6 +61,9 @@ class EliminarArticuloView(DeleteView):
     model = Articulo
     template_name = 'articulos/eliminar_articulo.html'
     success_url = reverse_lazy('home')
+    context_object_name = 'post'
+
+###Publicaciones
 
 class MenuPubli(ListView):
     model = Publicacion
@@ -75,9 +78,6 @@ class MenuPubli(ListView):
         dicc["General"] = Publicacion.objects.filter(tipo__contains="General")
 
         return dicc 
-
-
-
 
 class PublicacionView(DetailView):
     model = Publicacion
@@ -99,6 +99,11 @@ class CrearPubliView(CreateView):
         form.instance.autor = self.request.user
         return super().form_valid(form)
 
+class EliminarPubliView(DeleteView):
+    model = Publicacion
+    template_name = 'publicaciones\eliminar_publi.html'
+    success_url = reverse_lazy('lista_publi')
+    context_object_name = 'post'
 
 
 def MiPerfil(request):
