@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'ferre',
     'miembros',
     'ckeditor',
-    'livereload'
 ]
 
 MIDDLEWARE = [
